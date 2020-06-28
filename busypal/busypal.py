@@ -149,8 +149,9 @@ class BusyPal:
             if not isinstance(self.cleanup, bool):
                 if isinstance(self.cleanup, str):
                     self.cleanup=[self.cleanup]
+                    self.cleanup = re.sub(r'\bspinner\b', 'spinner1', self.cleanup) 
                 else:
-                    self.cleanup = [re.sub(r'\bspinner\b', 'spinner1', item)for item in self.cleanup] 
+                    self.cleanup = [re.sub(r'\bspinner\b', 'spinner1', item) for item in self.cleanup] 
 
             if delay and float(delay):
                 if delay==0:
@@ -252,8 +253,6 @@ class BusyPal:
             else:
                 if self.cleanup is False:
                     self.cleanup = ['']
-                if '{spinner}' in self.fmt:
-                    self.fmt = self.fmt.replace('{spinner}', '{spinner1}')
                 if exception is not None:
                     if 'spinner1' in self.fmt:
                         if 'spinner1' in self.cleanup:
