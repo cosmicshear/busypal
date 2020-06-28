@@ -48,6 +48,8 @@ Usage:
 ...     time.sleep(8) # some long-running operations
 >>>     a_long_running_operation(5) # call a function
 |   ● | Hold on, it is taking longer than expected
+
+*** Do not use the context manager and the decorator together! You'll see a mess.
 """
 
 default_style_id = 0
@@ -134,7 +136,6 @@ class BusyPal:
         
         # TODO style_message, style_outcome
         # TODO simultaneously print a message without overlap with the sppinners [similar to tqdm.write() method]
-        # FIXME using decorators causes the function to return None (any fixes?)
         # TODO different enter/busy/exit styles for the message
         
         self.message = message
@@ -350,7 +351,8 @@ def wait(message='', style=None, style1=None, style2=None, frames=None,
             with BusyPal(message=message, style=style, style1=style1, style2=style2, frames=frames,
                          frames1=frames1, frames2=frames2, delay=delay,fmt=fmt,
                          donetext=donetext, failtext=failtext, cleanup=cleanup, skip=skip):
-                func(*args, **kwargs)
+                result = func(*args, **kwargs)
+            return result
         return wrapper
     return decorator
 
