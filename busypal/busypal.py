@@ -148,8 +148,8 @@ class BusyPal:
 
             if not isinstance(self.cleanup, bool):
                 if isinstance(self.cleanup, str):
-                    self.cleanup=[self.cleanup]
                     self.cleanup = re.sub(r'\bspinner\b', 'spinner1', self.cleanup) 
+                    self.cleanup = [self.cleanup]
                 else:
                     self.cleanup = [re.sub(r'\bspinner\b', 'spinner1', item) for item in self.cleanup] 
 
