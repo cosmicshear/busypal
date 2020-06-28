@@ -171,7 +171,7 @@ class BusyPal:
                     style_id1 = style1['id'] if 'id' in style1 else default_style_id
                     frames1 = style1['frames'] if 'frames' in style1 else None
                     color1 = style1['color'] if 'color' in style1 else None # DARK_ORANGE
-                    typeface1 = style1['typeface'] if 'typeface' in style1 else RESET
+                    typeface1 = style1['typeface'] if 'typeface' in style1 else 'RESET'
                 else:
                     if style1 is not None and not isinstance(style1, (int,str)):
                         raise ValueError('styles only accept dictionaries, strings and integers')
@@ -190,7 +190,7 @@ class BusyPal:
                     style_id2 = style2['id'] if 'id' in style2 else default_style_id
                     frames2 = style2['frames'] if 'frames' in style2 else None
                     color2 = style2['color'] if 'color' in style2 else None # DARK_ORANGE
-                    typeface2 = style2['typeface'] if 'typeface' in style2 else RESET
+                    typeface2 = style2['typeface'] if 'typeface' in style2 else 'RESET'
                 else:
                     if style2 is not None and not isinstance(style2, (int,str)):
                         raise ValueError('styles only accept dictionaries, strings and integers')
