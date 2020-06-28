@@ -42,8 +42,8 @@ def isnotebook():
     except NameError:
         return False      # Probably standard Python interpreter
 
-def onscreen():
-    ' Checks whether the stdout/stderr is showing up on the screen or is being redirected to a file '
+def shownonscreen():
+    ' Checks whether the stdout/stderr shows up on the screen or is being redirected to a file '
     if isterminal() or isipython() or isnotebook():
         return True
     else:
