@@ -138,7 +138,7 @@ class BusyPal:
         # TODO different enter/busy/exit styles for the message
         
         self.message = message
-        self.skip = skip or not session.onscreen()
+        self.skip = skip or not session.shownonscreen()
         
         if not self.skip:
             self.fmt = fmt
