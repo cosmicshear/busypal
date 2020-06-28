@@ -184,7 +184,7 @@ class BusyPal:
                     typeface1 = 'RESET'
                     if isinstance(style1, (str,list,tuple)):
                         frames1 = style1
-                    else
+                    else:
                         style_id1 = style1
                 self.spinner1 = frames1 if frames1 is not None else anim[style_id1]
                 self.spinner1_generator = self.generate_spin(self.spinner1,color1,typeface1)
