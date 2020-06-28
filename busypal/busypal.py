@@ -101,8 +101,8 @@ anim[31] = [r'•–––––––––––––',
             r'–––––––––––––•',
              '✘', '✔']
 
-stylized_done = lambda x: cl.fore.GREEN+cl.style.BOLD+cl.style.REVERSE+x+cl.style.RESET
-stylized_fail = lambda x: cl.fore.RED+cl.style.BOLD+cl.style.REVERSE+x+cl.style.RESET # style `reverse` inverts colors
+stylized_done = lambda x: cl.fore.GREEN+cl.style.BOLD+x+cl.style.RESET
+stylized_fail = lambda x: cl.fore.RED+cl.style.BOLD+x+cl.style.RESET # cl.style.REVERSE inverts the colors
 
 class BusyPal:
 
@@ -130,11 +130,13 @@ class BusyPal:
         return line
     
     def __init__(self, message='', style=None, style1=None, style2=None, frames=None, frames1=None, frames2=None, delay=None,
-                 fmt='{spinner} {message} {outcome}', donetext=' Done! ', failtext=' Failed! ', cleanup=False, skip=False):
+                 fmt='{spinner} {message} {outcome}', donetext='Done!', failtext='Failed!', cleanup=False, skip=False):
         
         # TODO style_message, style_outcome
         # TODO simultaneously print a message without overlap with the sppinners [similar to tqdm.write() method]
-
+        # FIXME using decorators causes the function to return None (any fixes?)
+        # TODO different enter/busy/exit styles for the message
+        
         self.message = message
         self.skip = skip or not session.onscreen()
         
@@ -340,7 +342,7 @@ def omittable_parentheses_decorator(decorator):
 @omittable_parentheses_decorator
 def wait(message='', style=None, style1=None, style2=None, frames=None,
          frames1=None, frames2=None, delay=None,fmt='{spinner} {message} {outcome}',
-         donetext=' Done! ', failtext=' Failed! ', cleanup=False, skip=False, *args, **kwargs):
+         donetext='Done!', failtext='Failed!', cleanup=False, skip=False, *args, **kwargs):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
