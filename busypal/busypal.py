@@ -252,6 +252,8 @@ class BusyPal:
             else:
                 if self.cleanup is False:
                     self.cleanup = ['']
+                if '{spinner}' in self.fmt:
+                    self.fmt = self.fmt.replace('{spinner}', '{spinner1}')
                 if exception is not None:
                     if 'spinner1' in self.fmt:
                         if 'spinner1' in self.cleanup:
