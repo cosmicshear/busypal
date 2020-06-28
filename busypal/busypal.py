@@ -177,14 +177,14 @@ class BusyPal:
                     color1 = style1['color'] if 'color' in style1 else None # DARK_ORANGE
                     typeface1 = style1['typeface'] if 'typeface' in style1 else 'RESET'
                 else:
-                    if style1 is not None and not isinstance(style1, (int,str)):
-                        raise ValueError('styles only accept dictionaries, strings and integers')
+                    if style1 is not None and not isinstance(style1, (int,str,list,tuple)):
+                        raise ValueError('styles only accept dictionaries, strings, list, tuples and integers')
                     style1 = style1 if style1 is not None else default_style_id
                     color1 = None
                     typeface1 = 'RESET'
-                    if isinstance(style1, str):
+                    if isinstance(style1, (str,list,tuple)):
                         frames1 = style1
-                    else:
+                    else
                         style_id1 = style1
                 self.spinner1 = frames1 if frames1 is not None else anim[style_id1]
                 self.spinner1_generator = self.generate_spin(self.spinner1,color1,typeface1)
@@ -196,12 +196,12 @@ class BusyPal:
                     color2 = style2['color'] if 'color' in style2 else None # DARK_ORANGE
                     typeface2 = style2['typeface'] if 'typeface' in style2 else 'RESET'
                 else:
-                    if style2 is not None and not isinstance(style2, (int,str)):
-                        raise ValueError('styles only accept dictionaries, strings and integers')
+                    if style2 is not None and not isinstance(style2, (int,str,list,tuple)):
+                        raise ValueError('styles only accept dictionaries, strings, list, tuples and integers')
                     style2 = style2 if style2 is not None else default_style_id
                     color2 = None
                     typeface2 = 'RESET'
-                    if isinstance(style2, str):
+                    if isinstance(style2, (str,list,tuple)):
                         frames2 = style2
                     else:
                         style_id2 = style2
