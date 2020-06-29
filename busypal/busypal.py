@@ -26,15 +26,15 @@ Usage:
 
 *** With the decorator BusyPal provides:
 
->>> from busypal import wait
->>> @wait
+>>> from busypal import busy
+>>> @busy
 ... def a_long_running_operation(delay):
 ...     time.sleep(delay)
 ...
 >>> a_long_running_operation(10)
 /
 
->>> @wait(message='Please wait', style1=20, style2=29, fmt='{spinner1} {message} {spinner2} {outcome}', cleanup=['spinner2'])
+>>> @busy(message='Please wait', style1=20, style2=29, fmt='{spinner1} {message} {spinner2} {outcome}', cleanup=['spinner2'])
 ... def a_long_running_operation(delay):
 ...     time.sleep(delay)
 ...     # raise Exception('something went wrong!') # this will be raised and terminate the whole process
@@ -354,7 +354,7 @@ def omittable_parentheses_decorator(decorator):
     return wrapper
 
 @omittable_parentheses_decorator
-def wait(message='', style=None, style1=None, style2=None, frames=None,
+def busy(message='', style=None, style1=None, style2=None, frames=None,
          frames1=None, frames2=None, delay=None,fmt='{spinner} {message} {outcome}',
          donetext='Done!', failtext='Failed!', cleanup=False, skip=0, *args, **kwargs):
     def decorator(func):
