@@ -118,7 +118,7 @@ class BusyPal:
             colors = ''
             for key, value in color.items():
                 fbg = getattr(cl, key) # 'fore', 'back'
-                colors += getattr(fbg, value)
+                colors += getattr(fbg, value).upper()
         stylized_frames = lambda x: getattr(cl.style,typeface)+colors+x+cl.style.RESET
         while True: 
             for frame in frames[:-2]:
