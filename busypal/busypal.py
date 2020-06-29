@@ -141,7 +141,11 @@ class BusyPal:
         if not isinstance(skip, (bool, int)):
             raise ValueError('`skip` should be of type boolean or integer.')
 
-        self.skip = 1 if session.viewedonscreen() else skip
+        self.skip = skip
+
+        if skip==0 and not session.viewedonscreen():
+            self.skip = 1 # it does not show the animation part at least
+
         self.message = message
         
         if not self.skip:
