@@ -135,7 +135,7 @@ class BusyPal:
                  fmt='{spinner} {message} {outcome}', donetext='Done!', failtext='Failed!', cleanup=False, skip=0):
         
         # TODO style_message, style_outcome
-        # TODO simultaneously print a message without overlap with the sppinners [similar to tqdm.write() method]
+        # TODO simultaneously print a message without overlap with the sppinners [similar to tqdm.write() method] - also look at https://pypi.org/project/enlighten/
         # TODO different enter/busy/exit styles for the message
         
         if not isinstance(skip, (bool, int)):
