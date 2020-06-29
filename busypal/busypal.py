@@ -132,14 +132,18 @@ class BusyPal:
         return line
     
     def __init__(self, message='', style=None, style1=None, style2=None, frames=None, frames1=None, frames2=None, delay=None,
-                 fmt='{spinner} {message} {outcome}', donetext='Done!', failtext='Failed!', cleanup=False, skip=False):
+                 fmt='{spinner} {message} {outcome}', donetext='Done!', failtext='Failed!', cleanup=False, skip=0):
         
         # TODO style_message, style_outcome
         # TODO simultaneously print a message without overlap with the sppinners [similar to tqdm.write() method]
         # TODO different enter/busy/exit styles for the message
         
+        if not isinstance(self.skip, (bool, int)):
+            raise ValueError('`skip` should be of type boolean or integer.')
+
         self.message = message
-        self.skip = skip or not session.shownonscreen()
+
+        self.skip = 1 if session.viewedonscreen() else skip
         
         if not self.skip:
             self.fmt = fmt
@@ -233,10 +237,15 @@ class BusyPal:
             # - thread.daemon=True causes the thread to terminate when the main process ends
             threading.Thread(target=self.animate, daemon=True).start()
         else:
-            # - just write the message if given and skip the animation if the stdout
-            #   is redirected to a file etc. or `skip` is explicitely requested
-            if self.message!='':
-                sys.stdout.write(f'{self.message}\n')
+            # *** don't output anything - neigther the message (even if provided) nor the animation - if:
+            #       * `skip` is explicitely set to something more than 1 (which can be 2)
+            # *** otherwise just skip the animation part and write the message if:
+            #       * `skip` is explicitely set to 1
+            #                  - or -
+            #       * the output is not being viewed on the screen (i.e. redirected to a file or something)
+            if self.skip == 1:
+                if self.message!='':
+                    sys.stdout.write(f'{self.message}\n')
 
     def __exit__(self, exception, value, traceback):
         if self.skip:
@@ -344,7 +353,7 @@ def omittable_parentheses_decorator(decorator):
 @omittable_parentheses_decorator
 def wait(message='', style=None, style1=None, style2=None, frames=None,
          frames1=None, frames2=None, delay=None,fmt='{spinner} {message} {outcome}',
-         donetext='Done!', failtext='Failed!', cleanup=False, skip=False, *args, **kwargs):
+         donetext='Done!', failtext='Failed!', cleanup=False, skip=0, *args, **kwargs):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
