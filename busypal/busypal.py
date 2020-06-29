@@ -138,12 +138,11 @@ class BusyPal:
         # TODO simultaneously print a message without overlap with the sppinners [similar to tqdm.write() method]
         # TODO different enter/busy/exit styles for the message
         
-        if not isinstance(self.skip, (bool, int)):
+        if not isinstance(skip, (bool, int)):
             raise ValueError('`skip` should be of type boolean or integer.')
 
-        self.message = message
-
         self.skip = 1 if session.viewedonscreen() else skip
+        self.message = message
         
         if not self.skip:
             self.fmt = fmt
