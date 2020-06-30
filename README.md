@@ -4,4 +4,4 @@ Shows a busy indicator while a long process is running in the background. This w
 *BusyPal* can be used for all sorts of ongoing processes that don't require anything to be written to *stdout/stderr*. The final status (success or failure) of the long-running operation will be reported at the end.
 
 # Installation
-pip install git+https://github.com/cosmicshear/busypal
+pip install git+https://github.com/enourbakhsh/busypal
