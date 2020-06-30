@@ -9,6 +9,7 @@ setup(name='busypal',
       license='MIT',
       packages=['busypal'],
       install_requires=[
+          "psutil",
           "colored",
       ],
       zip_safe=False)
