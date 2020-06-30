@@ -66,11 +66,11 @@ def session_type():
     try:
         ipython = get_ipython()
         kernel  = ipython.kernel.__module__
-    except NameError:       # standard python interpreter in terminal
+    except NameError:                       # standard python interpreter in terminal
         ipython = False
         kernel  = 'None'
-    except AttributeError:  # 'TerminalInteractiveShell' object has no attribute 'kernel'   
-        ipython = True      # IPython running from terminal
+    except AttributeError:                  # 'TerminalInteractiveShell' object has no attribute 'kernel'   
+        ipython = True                      # IPython running from terminal
         kernel  = 'None'
     if cmdline_has('jupyter-(lab|notebook)') and 'google' in kernel:
         return 'google-colab'
@@ -85,15 +85,22 @@ def session_type():
                                             # ... Can we add more GUIs, IDEs, etc. here? ...
     else:
         shell = psutil.Process().parent().cmdline()[0]
-        shell = shell.rstrip('/').split('/').pop().replace('-','') # pull the exact name out
-        if ipython:
-            # IPython running from shell, e.g. 'ipython-zsh', 'ipython-bash', 'ipython-fish', etc.
+        # - now pull the exact name out
+        if os.name == 'nt':                 # Windows (e.g. shell = 'Explorer.EXE' for python executable,
+                                            # 'pythonw.exe' for IDLE python executable,
+                                            # 'cmd.exe' for the standard Windows cmd
+                                            # 'ipython' for ipython typed in the standard Windows cmd (we will change it to 'cmd.exe')
+            shell = shell.split('\\').pop()
+            if shell == 'ipython':
+                shell = 'cmd.exe'
+        else:                               # Linux, OSX (e.g. shell = 'zsh', 'bash', 'fish', 'tcsh', 'ash', 'dash')
+            shell = shell.rstrip('/').split('/').pop().replace('-','')
+        if ipython:                         # IPython running from shell, e.g. 'ipython-bash', 'ipython-fish', etc.
             return 'ipython-{}'.format(shell)
         else:
-            # e.g. 'zsh', 'bash', 'fish', 'tcsh', 'ash', 'dash', etc.
             return shell
 
-## modified from https://stackoverflow.com/a/39662359/11560784
+## modified from https://stackoverflow.com/a/39662359/11560784 [not working as expected, I used a different approach]
 # def isnotebook():
 #     ' Are we running this in a notebook environment? '
 #     try:
