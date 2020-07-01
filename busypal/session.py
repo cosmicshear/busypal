@@ -21,7 +21,7 @@ def isterminal():
     Are we running this in a Python command shell directly executed from a standard terminal
     command line (e.g. bash, tcsh, zsh) with the stdout/stderr shown in the terminal?
     '''
-    return os.fstat(0) == os.fstat(1) # or sys.stdin.isatty()
+    return sys.stdin.isatty() # checks if stdin is a terminal [or os.fstat(0) == os.fstat(1) but it wasn't working in Windows]
 
 def isipythonterminal():
     '''
