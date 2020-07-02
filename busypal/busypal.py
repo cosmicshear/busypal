@@ -142,6 +142,7 @@ class BusyPal:
         # TODO style_message, style_outcome
         # TODO simultaneously print a message without overlap with the sppinners [similar to tqdm.write() method] - also look at https://pypi.org/project/enlighten/
         # TODO different enter/busy/exit styles for the message
+        # TODO add the time it took to finish the process somehow in __exit__
         
         if not isinstance(skip, (bool, int)):
             raise ValueError('`skip` should be of type boolean or integer.')
