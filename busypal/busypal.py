@@ -137,7 +137,7 @@ class BusyPal:
         return line
     
     def __init__(self, message='', style=None, style1=None, style2=None, frames=None, frames1=None, frames2=None, delay=None,
-                 fmt='{spinner} {message} {outcome}', donetext='Done!', failtext='Failed!', cleanup=False, skip=0):
+                 fmt='{spinner} {message} {outcome}', donetext='Done!', failtext='Failed!', cleanup=False, skip=0, verbose=True):
         
         # TODO style_message, style_outcome
         # TODO simultaneously print a message without overlap with the sppinners [similar to tqdm.write() method] - also look at https://pypi.org/project/enlighten/
@@ -151,10 +151,15 @@ class BusyPal:
         if (skip==0 or not skip) and not session.viewedonscreen():
             self.skip = 1 # it does not show the animation part at least
 
-        self.message = message
+        self.message = message if verbose else ''
         
         if not self.skip:
-            self.fmt = fmt
+
+            if not verbose and '{message}' in fmt:
+                self.fmt = self.remove_block('message', fmt)
+            else:
+                self.fmt = fmt
+
             self.donetext = donetext
             self.failtext = failtext
             self.cleanup = cleanup
