@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(name='busypal',
       version='1.0.0',
-      description='Shows a busy indicator for long-running operations while it is still processing',
+      description='Shows a busy indicator for long-running operations while the process is still going',
       url='https://github.com/cosmicshear/busypal',
       author='Erfan Nourbakhsh',
       author_email='erfanxyz@gmail.com',
