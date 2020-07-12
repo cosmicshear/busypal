@@ -150,11 +150,11 @@ class BusyPal:
 
         self.skip = skip
 
-        if (skip==0 or not skip) and skip>0 and not session.viewedonscreen():
+        if (skip==0 or not skip) and not session.viewedonscreen():
             self.skip = 1 # it does not show the animation part at least
             
         if skip<0:
-            self.skip = -skip # Also, it does not skip under any circumstances
+            self.skip = 0 # it does not skip under any circumstances
 
         self.message = message if verbose else ''
         
