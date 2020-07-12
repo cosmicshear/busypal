@@ -240,8 +240,10 @@ class BusyPal:
             if 'message' in self.fmt:
                 message = self.message
             if 'outcome' in self.fmt:
-            	# - add an additional space here because sometimes the last character blinks unwantedly
-                line = self.remove_block('outcome', line)+' '
+                line = self.remove_block('outcome', line)
+            if not line.endswith(' '):
+                # - add an additional space here because sometimes the last character blinks unwantedly
+                line += ' '
             self.line = f"\r{line.format(**locals())}"
             sys.stdout.write(self.line)
             sys.stdout.flush()
