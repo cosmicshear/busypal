@@ -13,6 +13,7 @@ import sys
 from contextlib import redirect_stderr
 import re
 import psutil
+from multiprocessing import current_process
 from io import StringIO         # python 3
 # from StringIO import StringIO # python 2 (who cares?)
 
@@ -122,6 +123,10 @@ def viewedonscreen():
         return True
     else:
         return False
+
+def isparent():
+    ' Main/parent or forked etc.? '
+    return current_process().name=='MainProcess'
 
 def javascript_friendly():
     ' Checks whether we are able to run codes that require javascript through ipywidgets '
