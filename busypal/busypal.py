@@ -271,7 +271,7 @@ class BusyPal:
                 return False
         else:
             self.busy = False
-            time.sleep(self.delay)
+            #time.sleep(self.delay)
             if self.cleanup is True:
                 blank = ' ' * len(self.line) # overwrite with blank
                 sys.stdout.write(f"\r{blank}\r")
