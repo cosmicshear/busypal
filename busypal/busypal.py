@@ -144,7 +144,7 @@ class BusyPal:
         # TODO different enter/busy/exit styles for the message
         # TODO add the time it took to finish the process somehow in __exit__
         # TODO add a timer showing the elapsed time as a spinner style
-        # TODO cl.fore.GREEN is darker than cl.stylize(..., cl.fg('green'), ...) [same for red]
+        # TODO cl.fore.GREEN is darker than cl.stylize(..., cl.fg('green'), ...) [same for red] --> fix: cl.attr('bold')+cl.fg('green') [plus!]
         
         if not isinstance(skip, (bool, int)):
             raise ValueError('`skip` should be of type boolean or integer.')
@@ -289,12 +289,12 @@ class BusyPal:
                         if 'spinner1' in self.cleanup:
                             self.fmt = self.remove_block('spinner1', self.fmt)
                         else:
-                            spinner1 = cl.stylize(self.spinner1[-2], cl.fg('red'), cl.attr('bold'))
+                            spinner1 = cl.stylize(self.spinner1[-2], cl.fg('red')+cl.attr('bold'))
                     if 'spinner2' in self.fmt:
                         if 'spinner2' in self.cleanup:
                             self.fmt = self.remove_block('spinner2', self.fmt)
                         else:
-                            spinner2 = cl.stylize(self.spinner2[-2], cl.fg('red'), cl.attr('bold'))
+                            spinner2 = cl.stylize(self.spinner2[-2], cl.fg('red')+cl.attr('bold'))
                     if 'message' in self.fmt:
                         if 'message' in self.cleanup:
                             self.fmt = self.remove_block('message', self.fmt)
@@ -315,12 +315,12 @@ class BusyPal:
                         if 'spinner1' in self.cleanup:
                             self.fmt = self.remove_block('spinner1', self.fmt)
                         else:
-                            spinner1 = cl.stylize(self.spinner1[-1], cl.fg('green'), cl.attr('bold'))
+                            spinner1 = cl.stylize(self.spinner1[-1], cl.fg('green')+cl.attr('bold'))
                     if 'spinner2' in self.fmt:
                         if 'spinner2' in self.cleanup:
                             self.fmt = self.remove_block('spinner2', self.fmt)
                         else:
-                            spinner2 = cl.stylize(self.spinner2[-1], cl.fg('green'), cl.attr('bold'))
+                            spinner2 = cl.stylize(self.spinner2[-1], cl.fg('green')+cl.attr('bold'))
                     if 'message' in self.fmt:
                         if 'message' in self.cleanup:
                             self.fmt = self.remove_block('message', self.fmt)
