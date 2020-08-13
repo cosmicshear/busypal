@@ -7,4 +7,4 @@ Shows a busy indicator while a long process is running in the background. This w
 pip install git+https://github.com/enourbakhsh/busypal
 
 # Common Issues
-This package takes advantage of f-strings which were introduced with Python 3.6. In older python versions, an f-string will result in a syntax error.
+This package takes advantage of f-strings which were introduced with Python 3.6. In order python versions, an f-string will result in a syntax error.
