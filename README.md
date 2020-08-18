@@ -6,5 +6,7 @@ Shows a busy indicator while a long process is running in the background. This w
 # Installation
 pip install git+https://github.com/enourbakhsh/busypal
 
-# Common Issues
+# Common Installation Issues
 This package takes advantage of f-strings which were introduced with Python 3.6. In order python versions, an f-string will result in a syntax error.
+
+In case `pip` gives you a `gcc` error while installing `psutil` in a `conda` environment, try `conda install psutil` before installing `SkyLink` ([source](https://github.com/ray-project/ray/issues/1340)).
